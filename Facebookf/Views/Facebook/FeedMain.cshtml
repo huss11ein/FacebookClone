@@ -1,0 +1,244 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- fontawesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+          integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer" />
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+          crossorigin="anonymous" />
+    <!-- main style -->
+    <link rel="stylesheet" type="text/css" href="~/Views/Facebook/style.css">
+    <link rel="stylesheet" href="~/Views/Facebook/main.css" />
+    <title>Facebook</title>
+</head>
+<body class="bg-gray postion-relative">
+    <!-- ================= Appbar ================= -->
+    
+    <!-- =============== New Chat Mobile =============== -->
+    <!-- ================= Main ================= -->
+    <div class="container-fluid">
+        <div class="row justify-content-evenly">
+            <!-- ================= Sidebar ================= -->
+            
+            <!-- ================= Timeline ================= -->
+            <div class="col-12 col-lg-6 pb-5">
+                <div class="d-flex flex-column justify-content-center w-100 mx-auto"
+                     style="padding-top: 56px; max-width: 680px">
+                    <!-- stories -->
+                    
+                    <!-- create post -->
+                    <div class="bg-white p-3 mt-3 rounded border shadow">
+                        <!-- avatar -->
+                        <div class="d-flex" type="button">
+                            <div class="p-1">
+                                <img src="https://source.unsplash.com/collection/happy-people"
+                                     alt="avatar"
+                                     class="rounded-circle me-2"
+                                     style="width: 38px; height: 38px; object-fit: cover" />
+                            </div>
+                            <input type="text"
+                                   class="form-control rounded-pill border-0 bg-gray pointer"
+                                   disabled
+                                   placeholder="What's on your mind, John?"
+                                   data-bs-toggle="modal"
+                                   data-bs-target="#createModal" />
+                        </div>
+                        <!-- create modal -->
+                        <div class="modal fade"
+                             id="createModal"
+                             tabindex="-1"
+                             aria-labelledby="createModalLabel"
+                             aria-hidden="true"
+                             data-bs-backdrop="false">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <!-- head -->
+                                    <div class="modal-header align-items-center">
+                                        <h5 class="text-dark text-center w-100 m-0"
+                                            id="exampleModalLabel">
+                                            Create Post
+                                        </h5>
+                                        <button type="button"
+                                                class="btn-close"
+                                                data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                    </div>
+                                    <!-- body -->
+                                    <div class="modal-body">
+                                        <div class="my-1 p-1">
+                                            <div class="d-flex flex-column">
+                                                <!-- name -->
+                                                <div class="d-flex align-items-center">
+                                                    <div class="p-2">
+                                                        <img src="https://source.unsplash.com/collection/happy-people"
+                                                             alt="from fb"
+                                                             class="rounded-circle"
+                                                             style="
+                                  width: 38px;
+                                  height: 38px;
+                                  object-fit: cover;
+                                " />
+                                                    </div>
+                                                    <div>
+                                                        <p class="m-0 fw-bold">John</p>
+                                                        <select class="form-select border-0 bg-gray w-75 fs-7"
+                                                                aria-label="Default select example">
+                                                            <option selected value="1">Public</option>
+                                                            <option value="2">Only Me</option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <!-- text -->
+
+                                                @Html.TextBoxFor(m => m.PostContent, new { @class = "form-control border-0" })
+                                                <!-- emoji  -->
+                                                <!-- options -->
+                                                <div class="
+                              d-flex
+                              justify-content-between
+                              border border-1 border-light
+                              rounded
+                              p-3
+                              mt-3
+                            ">
+                                                    <p class="m-0">Add to your post</p>
+                                                    <div>
+                                                        <i class="
+                                  fas
+                                  fa-images
+                                  fs-5
+                                  text-success
+                                  pointer
+                                  mx-1
+                                "></i>
+                                                        <i class="
+                                  fas
+                                  fa-user-check
+                                  fs-5
+                                  text-primary
+                                  pointer
+                                  mx-1
+                                "></i>
+                                                        <i class="
+                                  far
+                                  fa-smile
+                                  fs-5
+                                  text-warning
+                                  pointer
+                                  mx-1
+                                "></i>
+                                                        <i class="
+                                  fas
+                                  fa-map-marker-alt
+                                  fs-5
+                                  text-info
+                                  pointer
+                                  mx-1
+                                "></i>
+                                                        <i class="
+                                  fas
+                                  fa-microphone
+                                  fs-5
+                                  text-danger
+                                  pointer
+                                  mx-1
+                                "></i>
+                                                        <i class="
+                                  fas
+                                  fa-ellipsis-h
+                                  fs-5
+                                  text-muted
+                                  pointer
+                                  mx-1
+                                "></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- end -->
+                                    </div>
+                                    <!-- footer -->
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary w-100">
+                                            Post
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                        <!-- actions -->
+                        <div class="d-flex flex-column flex-lg-row mt-3">
+                            <!-- a 1 -->
+                            <div class="
+                    dropdown-item
+                    rounded
+                    d-flex
+                    align-items-center
+                    justify-content-center
+                  "
+                                 type="button">
+                                <i class="fas fa-video me-2 text-danger"></i>
+                                <p class="m-0 text-muted">Live Video</p>
+                            </div>
+                            <!-- a 2 -->
+                            <div class="
+                    dropdown-item
+                    rounded
+                    d-flex
+                    align-items-center
+                    justify-content-center
+                  "
+                                 type="button">
+                                <i class="fas fa-photo-video me-2 text-success"></i>
+                                <p class="m-0 text-muted">Photo/Video</p>
+                            </div>
+                            <!-- a 3 -->
+                            <div class="
+                    dropdown-item
+                    rounded
+                    d-flex
+                    align-items-center
+                    justify-content-center
+                  "
+                                 type="button">
+                                <i class="fas fa-smile me-2 text-warning"></i>
+                                <p class="m-0 text-muted">Feeling/Activity</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- posts -->
+                    <!-- p 1 -->
+                    
+                    <!-- p 2 -->
+
+                </div>
+            </div>
+            <!-- ================= Chatbar ================= -->
+            
+        </div>
+    </div>
+    <!-- ================= Chat Icon ================= -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+            crossorigin="anonymous"></script>
+    <script src="~/Views/Facebook/main.js"></script>
+</body>
+</html>
+

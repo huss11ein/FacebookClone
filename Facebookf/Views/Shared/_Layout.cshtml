@@ -1,0 +1,252 @@
+﻿@model Facebookf.ViewModels.BaseViewModel
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="bg-white d-flex align-items-center fixed-top shadow"
+         style="min-height: 56px; z-index: 5">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <!-- search -->
+                <div class="col d-flex align-items-center">
+                    <!-- logo -->
+                    <i class="fab fa-facebook text-primary" style="font-size: 3rem"></i>
+                    <!-- search bar -->
+                    <div class="input-group ms-2" type="button">
+                        <!-- mobile -->
+                        <span class="input-group-prepend d-lg-none"
+                              id="searchMenu"
+                              data-bs-toggle="dropdown"
+                              aria-expanded="false"
+                              data-bs-auto-close="outside">
+                            <div class="input-group-text bg-gray border-0 rounded-circle"
+                                 style="min-height: 40px">
+                                <i class="fas fa-search text-muted"></i>
+                            </div>
+                        </span>
+                        <!-- desktop -->
+                        <span class="input-group-prepend d-none d-lg-block"
+                              id="searchMenu"
+                              data-bs-toggle="dropdown"
+                              aria-expanded="false"
+                              data-bs-auto-close="outside">
+                            <div class="input-group-text bg-gray border-0 rounded-pill"
+                                 style="min-height: 40px; min-width: 230px">
+                                <i class="fas fa-search me-2 text-muted"></i>
+                                <p class="m-0 fs-7 text-muted">Search Facebook</p>
+                            </div>
+                        </span>
+                        <!-- search menu -->
+                        <ul class="dropdown-menu overflow-auto border-0 shadow p-3"
+                            aria-labelledby="searchMenu"
+                            style="width: 20em; max-height: 600px">
+                            <!-- search input -->
+                            <li>
+                                @Html.TextBox("Search");
+                                <input type="submit" id="SearchBtn" value="Search" /><br /><br />
+
+                                @Html.TextBox("Search");
+                                <input type="submit" id="SearchBtn" value="Search" /><br /><br />
+                                <script>
+                                    $(document).ready(function () {
+                                        $("#SearchBtn").click(function () {
+
+                                            var SearchValue = $("#Search").val();
+                                            var SetData = $("#Container");
+                                            SetData.html("");
+                                            $.ajax({
+                                                type: "post",
+                                                url: "/Facebookf/Index?search=" + SearchValue,
+                                                contentType: "html",
+                                                success: function (result) {
+                                                    if (result.length == 0) {
+
+                                                    }
+                                                    else {
+                                                        $.each(result, function (index, value) {
+                                                            var Data = "<div class=' alert fade show dropdown - item p - 1 m - 0 d - flex align - items - center justify - content - between'>" +
+                                                                "role='alert'>" + " <div class='d-flex align - items - center'>" + " <p class='m-0'>Lorem ipsum</p>" + "</div>" + " </div>"
+
+
+
+
+
+
+
+
+                                                            SetData.append(Data);
+
+                                                        });
+                                                    }
+                                                }
+                                            });
+                                        });
+                                    });
+
+                                </script>
+                            </li>
+                            <!-- search 1 -->
+                         
+                            <li class="my-4" id="Container">
+                                <div class="
+                      alert
+                      fade
+                      show
+                      dropdown-item
+                      p-1
+                      m-0
+                      d-flex
+                      align-items-center
+                      justify-content-between
+                    "
+                                     role="alert">
+                                    <div class="d-flex align-items-center">
+                                        <img src="https://source.unsplash.com/random/1"
+                                             alt="avatar"
+                                             class="rounded-circle me-2"
+                                             style="width: 35px; height: 35px; object-fit: cover" />
+                                        <p class="m-0">Lorem ipsum</p>
+                                    </div>
+                                    <button type="button"
+                                            class="btn-close p-0 m-0"
+                                            data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                </div>
+                            </li>
+                          
+                        </ul>
+                    </div>
+                </div>
+                <!-- nav -->
+                <div class="col d-none d-xl-flex justify-content-center">
+                    <!-- home -->
+                    <div class="mx-4 nav__btn nav__btn-active">
+                        <button type="button" class="btn px-4">
+                            <i class="fas fa-home text-muted fs-4"></i>
+                        </button>
+                    </div>
+                    <!-- market -->
+                    <div class="mx-4 nav__btn">
+                        <button type="button" class="btn px-4">
+                            <i class="fas fa-store text-muted fs-4"></i>
+                        </button>
+                    </div>
+                    <!-- group -->
+                    <div class="mx-4 nav__btn">
+                        <button type="button" class="btn px-4">
+                            <i type="button"
+                               class="position-relative fas fa-users text-muted fs-4">
+                                <span class="
+                      position-absolute
+                      top-0
+                      start-100
+                      translate-middle
+                      badge
+                      rounded-pill
+                      bg-danger
+                    "
+                                      style="font-size: 0.5rem">
+                                    1
+                                    <span class="visually-hidden"></span>
+                                </span>
+                            </i>
+                        </button>
+                    </div>
+                    <!-- gaming -->
+                    <div class="mx-4 nav__btn">
+                        <button type="button" class="btn px-4">
+                            <i class="fas fa-gamepad text-muted fs-4"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- menus -->
+                <div class="col d-flex align-items-center justify-content-end">
+                    <!-- avatar -->
+                    <div class="align-items-center justify-content-center d-none d-xl-flex">
+                        <img src="https://source.unsplash.com/collection/happy-people"
+                             class="rounded-circle me-2"
+                             alt="avatar"
+                             style="width: 38px; height: 38px; object-fit: cover" />
+                        <p class="m-0">John</p>
+                    </div>
+                    <!-- main menu -->
+                    <div class="
+                rounded-circle
+                p-1
+                bg-gray
+                d-flex
+                align-items-center
+                justify-content-center
+                mx-2
+              "
+                         style="width: 38px; height: 38px"
+                         type="button"
+                         id="mainMenu"
+                         data-bs-toggle="dropdown"
+                         aria-expanded="false"
+                         data-bs-auto-close="outside">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </div>
+                    <!-- main menu dd -->
+                    <ul class="dropdown-menu border-0 shadow p-3 overflow-auto"
+                        aria-labelledby="mainMenu"
+                        style="width: 23em; max-height: 600px">
+                        <!-- menu -->
+                        <div>
+                            <!-- header -->
+                            <li class="p-1 mx-2">
+                                <h2>Menu</h2>
+                            </li>
+                            <!-- search -->
+                            <li class="p-1">
+                                <div class="input-group-text bg-gray border-0 rounded-pill"
+                                     style="min-height: 40px; min-width: 230px">
+                                    <i class="fas fa-search me-2 text-muted"></i>
+                                    <input type="text"
+                                           class="form-control rounded-pill border-0 bg-gray"
+                                           placeholder="Search Menu" />
+                                </div>
+                            </li>
+                            <!-- social items -->
+                          
+                        </div>
+                    </ul>
+                    <!-- chat -->
+                   
+                    <!-- chat  dd -->
+                    <!-- notifications -->
+                    
+
+                    <!-- secondary menu -->
+                    
+                    <!-- secondary menu dd -->
+                   
+                    <!-- end -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

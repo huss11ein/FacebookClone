@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FacebookModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Comments">
+    <Key>
+      <PropertyRef Name="CommentID" />
+    </Key>
+    <Property Name="CommentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CommentContent" Type="nvarchar" MaxLength="100" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="PostID" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Facebook.dbo.FriendRequests' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="FriendRequests">
+    <Key>
+      <PropertyRef Name="SenderID" />
+      <PropertyRef Name="RecieverID" />
+    </Key>
+    <Property Name="SenderID" Type="int" Nullable="false" />
+    <Property Name="RecieverID" Type="int" Nullable="false" />
+    <Property Name="IsApproved" Type="int" />
+  </EntityType>
+  <EntityType Name="Likes">
+    <Key>
+      <PropertyRef Name="LikeID" />
+    </Key>
+    <Property Name="LikeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="LikeOrDislike" Type="bit" Nullable="false" />
+    <Property Name="PostID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="POSTS">
+    <Key>
+      <PropertyRef Name="PostID" />
+    </Key>
+    <Property Name="PostID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PostDate" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="PostContent" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Publicity" Type="int" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="LikesNumber" Type="int" />
+    <Property Name="DisLikesNumber" Type="int" />
+    <Property Name="PostImage" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="SecondName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="City" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Country" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="PhoneNumber" Type="int" Nullable="false" />
+    <Property Name="UserEmail" Type="nvarchar" MaxLength="100" />
+    <Property Name="UserImage" Type="varbinary(max)" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="100" />
+    <Property Name="Password" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <Association Name="FK__Comments__PostID__6FE99F9F">
+    <End Role="POSTS" Type="Self.POSTS" Multiplicity="0..1" />
+    <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="POSTS">
+        <PropertyRef Name="PostID" />
+      </Principal>
+      <Dependent Role="Comments">
+        <PropertyRef Name="PostID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Comments__UserID__6EF57B66">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Comments">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FriendReq__Recie__5CD6CB2B">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="FriendRequests" Type="Self.FriendRequests" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="FriendRequests">
+        <PropertyRef Name="RecieverID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FriendReq__Sende__5BE2A6F2">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="FriendRequests" Type="Self.FriendRequests" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="FriendRequests">
+        <PropertyRef Name="SenderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Likes__PostID__4AB81AF0">
+    <End Role="POSTS" Type="Self.POSTS" Multiplicity="1" />
+    <End Role="Likes" Type="Self.Likes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="POSTS">
+        <PropertyRef Name="PostID" />
+      </Principal>
+      <Dependent Role="Likes">
+        <PropertyRef Name="PostID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Likes__UserID__49C3F6B7">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Likes" Type="Self.Likes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Likes">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__POSTS__UserID__398D8EEE">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="POSTS" Type="Self.POSTS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="POSTS">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="FacebookModelStoreContainer">
+    <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Likes" EntityType="Self.Likes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="POSTS" EntityType="Self.POSTS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FriendRequests" EntityType="Self.FriendRequests" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [FriendRequests].[SenderID] AS [SenderID], 
+    [FriendRequests].[RecieverID] AS [RecieverID], 
+    [FriendRequests].[IsApproved] AS [IsApproved]
+    FROM [dbo].[FriendRequests] AS [FriendRequests]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__Comments__PostID__6FE99F9F" Association="Self.FK__Comments__PostID__6FE99F9F">
+      <End Role="POSTS" EntitySet="POSTS" />
+      <End Role="Comments" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Comments__UserID__6EF57B66" Association="Self.FK__Comments__UserID__6EF57B66">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Comments" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FriendReq__Recie__5CD6CB2B" Association="Self.FK__FriendReq__Recie__5CD6CB2B">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="FriendRequests" EntitySet="FriendRequests" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FriendReq__Sende__5BE2A6F2" Association="Self.FK__FriendReq__Sende__5BE2A6F2">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="FriendRequests" EntitySet="FriendRequests" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Likes__PostID__4AB81AF0" Association="Self.FK__Likes__PostID__4AB81AF0">
+      <End Role="POSTS" EntitySet="POSTS" />
+      <End Role="Likes" EntitySet="Likes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Likes__UserID__49C3F6B7" Association="Self.FK__Likes__UserID__49C3F6B7">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Likes" EntitySet="Likes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__POSTS__UserID__398D8EEE" Association="Self.FK__POSTS__UserID__398D8EEE">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="POSTS" EntitySet="POSTS" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
